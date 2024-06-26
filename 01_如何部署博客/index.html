@@ -8,7 +8,7 @@
         
         <link rel="canonical" href="https://www.gitee.com/yumoz/01_%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>如何部署博客到Github Pages - yumoz博客系统</title>
+        <title>教程 - yumoz博客系统</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -41,6 +41,9 @@
                                 <a href=".." class="nav-link">首页</a>
                             </li>
                             <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">教程</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="../about/" class="nav-link">关于</a>
                             </li>
                         </ul>
@@ -51,6 +54,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../about/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -91,6 +104,35 @@ pip install mkdocs
 # 下载完成查看版本
 CMD中输入命令：mkdocs --version
 mkdocs, version 1.6.0 from C:\Users\*****
+</code></pre>
+<ul>
+<li>修改索引文件</li>
+</ul>
+<p>修改mkdocs.yml大致格式如下</p>
+<pre><code class="language-yml">site_name: yumoz博客系统
+site_url: https://www.gitee.com/yumoz 
+nav:
+    - 首页: index.md
+    - 关于: about.md
+theme: 
+    name: mkdocs
+    highlightjs: true
+    hljs_languages:
+        - yaml
+        - rust
+        - python
+        - cpp
+
+    locale: zh_CN
+
+    markdown_extentions:
+      - admonition
+
+    plugins:
+      - search
+
+    extra_css:
+      - resources/css/extra.css
 </code></pre>
 <p>进入写文档的页面</p>
 <pre><code>mkdocs gh-deploy
