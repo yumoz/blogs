@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://www.gitee.com/yumoz/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/VsCodeC%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>VsCodeC语言环境配置 - yumoz博客系统</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/rust.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">yumoz博客系统</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">首页</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../01_%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2/" class="nav-link">教程</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../about/" class="nav-link">关于</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#vscode" class="nav-link">下载VsCode</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#mingw" class="nav-link">安装编译器 MinGW</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#_1" class="nav-link">配置环境变量</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#vscode_1" class="nav-link">配置VsCode</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#c_cpp_propertiesjson" class="nav-link">c_cpp_properties.json：</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#launchjson" class="nav-link">launch.json:</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#taskjson" class="nav-link">task.json</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>VsCodeC语言环境配置：</p>
+<p>https://blog.csdn.net/ren648154292/article/details/111151724</p>
+<h1 id="vscode">下载VsCode</h1>
+<h1 id="mingw">安装编译器 MinGW</h1>
+<h2 id="_1">配置环境变量</h2>
+<p>D:\Application\mingw64\bin 添加安装的目录文件到环境变量中；</p>
+<p>运行命令：</p>
+<p>在cmd.exe中输入如下命令：
+gcc -v -E -x c++ -</p>
+<pre><code class="language-shell">C:\Users\zealo&gt;gcc -v -E -x c++ -
+Using built-in specs.
+COLLECT_GCC=gcc
+Target: x86_64-w64-mingw32
+Configured with: ../../../src/gcc-8.1.0/configure --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --prefix=/mingw64 --with-sysroot=/c/mingw810/x86_64-810-win32-seh-rt_v6-rev0/mingw64 --enable-shared --enable-static --disable-multilib --enable-languages=c,c++,fortran,lto --enable-libstdcxx-time=yes --enable-threads=win32 --enable-libgomp --enable-libatomic --enable-lto --enable-graphite --enable-checking=release --enable-fully-dynamic-string --enable-version-specific-runtime-libs --disable-libstdcxx-pch --disable-libstdcxx-debug --enable-bootstrap --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-gnu-as --with-gnu-ld --with-arch=nocona --with-tune=core2 --with-libiconv --with-system-zlib --with-gmp=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-mpfr=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-mpc=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-isl=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-pkgversion='x86_64-win32-seh-rev0, Built by MinGW-W64 project' --with-bugurl=https://sourceforge.net/projects/mingw-w64 CFLAGS='-O2 -pipe -fno-ident -I/c/mingw810/x86_64-810-win32-seh-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' CXXFLAGS='-O2 -pipe -fno-ident -I/c/mingw810/x86_64-810-win32-seh-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' CPPFLAGS=' -I/c/mingw810/x86_64-810-win32-seh-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' LDFLAGS='-pipe -fno-ident -L/c/mingw810/x86_64-810-win32-seh-rt_v6-rev0/mingw64/opt/lib -L/c/mingw810/prerequisites/x86_64-zlib-static/lib -L/c/mingw810/prerequisites/x86_64-w64-mingw32-static/lib '
+Thread model: win32
+gcc version 8.1.0 (x86_64-win32-seh-rev0, Built by MinGW-W64 project)
+COLLECT_GCC_OPTIONS='-v' '-E' '-mtune=core2' '-march=nocona'
+ D:/Application/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/cc1plus.exe -E -quiet -v -iprefix D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/ -U_REENTRANT - -mtune=core2 -march=nocona
+ignoring duplicate directory &quot;D:/Application/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++&quot;
+ignoring duplicate directory &quot;D:/Application/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32&quot;
+ignoring duplicate directory &quot;D:/Application/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward&quot;
+ignoring duplicate directory &quot;D:/Application/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/8.1.0/include&quot;
+ignoring nonexistent directory &quot;C:/mingw810/x86_64-810-win32-seh-rt_v6-rev0/mingw64C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../include&quot;
+ignoring duplicate directory &quot;D:/Application/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed&quot;
+ignoring duplicate directory &quot;D:/Application/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include&quot;
+ignoring nonexistent directory &quot;C:/mingw810/x86_64-810-win32-seh-rt_v6-rev0/mingw64/mingw/include&quot;
+#include &quot;...&quot; search starts here:
+#include &lt;...&gt; search starts here:
+ D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++
+ D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32
+ D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward
+ D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include
+ D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed
+ D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include
+End of search list.
+</code></pre>
+<h1 id="vscode_1">配置VsCode</h1>
+<p>然后再建一个
+.vscode文件夹（注意前面有个点），在里面建三个文件，c_cpp_properties.json、launch.json、tasks.json</p>
+<h2 id="c_cpp_propertiesjson">c_cpp_properties.json：</h2>
+<p>替换成自己安装目录：</p>
+<p>"D:/Application/mingw64/include/**",
+"D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++",
+"D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32",
+  "D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward",
+    "D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include",
+                "D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed",
+                "D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"</p>
+<pre><code class="language-json">{
+    &quot;configurations&quot;: [
+        {
+            &quot;name&quot;: &quot;Win32&quot;,
+            &quot;includePath&quot;: [
+                &quot;${workspaceRoot}&quot;,
+                &quot;D:/Application/mingw64/include/**&quot;,
+                &quot;D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++&quot;,
+                &quot;D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32&quot;,
+                &quot;D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward&quot;,
+                &quot;D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include&quot;,
+                &quot;D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed&quot;,
+                &quot;D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include&quot;
+            ],
+            &quot;defines&quot;: [
+                &quot;_DEBUG&quot;,
+                &quot;UNICODE&quot;,
+                &quot;__GNUC__=6&quot;,
+                &quot;__cdecl=__attribute__((__cdecl__))&quot;
+            ],
+            &quot;intelliSenseMode&quot;: &quot;msvc-x64&quot;,
+            &quot;browse&quot;: {
+                &quot;limitSymbolsToIncludedHeaders&quot;: true,
+                &quot;databaseFilename&quot;: &quot;&quot;,
+                &quot;path&quot;: [
+                    &quot;${workspaceRoot}&quot;,
+                    &quot;D:/Application/mingw64/include/**&quot;,
+                    &quot;D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++&quot;,
+                    &quot;D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32&quot;,
+                    &quot;D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward&quot;,
+                    &quot;D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include&quot;,
+                    &quot;D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed&quot;,
+                    &quot;D:/Application/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include&quot;
+                ]
+            }
+        }
+    ],
+    &quot;version&quot;: 4
+}
+</code></pre>
+<h2 id="launchjson">launch.json:</h2>
+<p>修改：   "miDebuggerPath": "D:\Application\mingw64\bin\gdb.exe",// 自己电脑安装MinGW的gdb</p>
+<pre><code class="language-json">{
+    &quot;version&quot;: &quot;0.2.0&quot;,
+    &quot;configurations&quot;: [
+        {
+            &quot;name&quot;: &quot;(Windows) Launch&quot;,
+            &quot;type&quot;: &quot;cppvsdbg&quot;,
+            &quot;request&quot;: &quot;launch&quot;,
+            &quot;program&quot;: &quot;cmd&quot;,
+            &quot;preLaunchTask&quot;: &quot;echo&quot;,
+            &quot;args&quot;: [
+                &quot;/C&quot;,
+                &quot;${fileDirname}\\${fileBasenameNoExtension}.exe&quot;,
+                &quot;&amp;&quot;,
+                &quot;echo.&quot;,
+                &quot;&amp;&quot;,
+                &quot;pause&quot;
+            ],
+            &quot;stopAtEntry&quot;: false,
+            &quot;cwd&quot;: &quot;${workspaceFolder}&quot;,
+            &quot;environment&quot;: [],
+            &quot;externalConsole&quot;:true
+        },
+        {
+            &quot;name&quot;: &quot;(gdb) Launch&quot;,
+            &quot;type&quot;: &quot;cppdbg&quot;,
+            &quot;request&quot;: &quot;launch&quot;,
+            &quot;program&quot;: &quot;${workspaceFolder}/${fileBasenameNoExtension}.exe&quot;,
+            &quot;args&quot;: [],
+            &quot;stopAtEntry&quot;: false,
+            &quot;cwd&quot;: &quot;${workspaceFolder}&quot;,
+            &quot;environment&quot;: [],
+            &quot;externalConsole&quot;: true,
+            &quot;MIMode&quot;: &quot;gdb&quot;,
+            &quot;miDebuggerPath&quot;: &quot;D:\\Application\\mingw64\\bin\\gdb.exe&quot;,// 自己电脑安装MinGW的gdb
+            &quot;preLaunchTask&quot;: &quot;echo&quot;,//这里和task.json的label相对应
+            &quot;setupCommands&quot;: [
+                {
+                    &quot;description&quot;: &quot;Enable pretty-printing for gdb&quot;,
+                    &quot;text&quot;: &quot;-enable-pretty-printing&quot;,
+                    &quot;ignoreFailures&quot;: true
+                }
+            ]
+
+        }
+    ]
+}
+</code></pre>
+<h2 id="taskjson">task.json</h2>
+<pre><code class="language-json">{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    &quot;version&quot;: &quot;2.0.0&quot;,
+    &quot;tasks&quot;: [
+        {
+            &quot;label&quot;: &quot;echo&quot;,
+            &quot;type&quot;: &quot;shell&quot;,
+            &quot;command&quot;: &quot;gcc&quot;,
+            &quot;args&quot;: [
+                &quot;-g&quot;, 
+                &quot;${file}&quot;, 
+                &quot;-o&quot;, 
+                &quot;${fileBasenameNoExtension}.exe&quot;,
+                &quot;-fexec-charset=GBK&quot;//解决中文乱码
+            ]
+        }
+    ],
+    &quot;presentation&quot;: {
+        &quot;echo&quot;: true,
+        &quot;reveal&quot;: &quot;always&quot;,
+        &quot;focus&quot;: false,
+        &quot;panel&quot;: &quot;shared&quot;, 
+        &quot;showReuseMessage&quot;: true,
+        &quot;clear&quot;: false
+    }
+}
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://www.gitee.com/yumoz/CMake/Readme/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>宏 - yumoz博客系统</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/rust.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">yumoz博客系统</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">首页</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../01_%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2/" class="nav-link">教程</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../about/" class="nav-link">关于</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link">宏</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#_2" class="nav-link">常见变量</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_3" class="nav-link">动态库相关</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#_4" class="nav-link">库依赖</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_5" class="nav-link">依赖</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_6" class="nav-link">单个头文件和单个库文件</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_7" class="nav-link">以多个头文件和多个库文件为例</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_8" class="nav-link">技巧</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#-ui_h" class="nav-link">文件隐藏-隐藏ui_*.h</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_9" class="nav-link">如何设置启动项</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_10" class="nav-link">构建模式与宏指定</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_11" class="nav-link">指定导出库后缀</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_12" class="nav-link">调用脚本</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_13" class="nav-link">设置输出路径</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#cmake" class="nav-link">.cmake</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_14" class="nav-link">命令</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#message" class="nav-link">Message</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#file" class="nav-link">file</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#-source_group" class="nav-link">目录组织 - source_group()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#install" class="nav-link">install</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_15" class="nav-link">拷贝</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#findpackage" class="nav-link">FindPackage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_16" class="nav-link">示例</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#1" class="nav-link">示例1</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_17" class="nav-link">参考资料</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="_1">宏</h1>
+<h2 id="_2">常见变量</h2>
+<p>在 CMake 中，有许多常见的变量可用于配置和管理构建过程。以下是一些常见的变量，包括当前源码路径：</p>
+<ol>
+<li><code>CMAKE_SOURCE_DIR</code>：当前 CMakeLists.txt 所在的源码目录的根路径。</li>
+<li><code>CMAKE_BINARY_DIR</code>：构建目录的根路径，即构建生成的可执行文件、库和其他构建输出的存放位置。</li>
+<li><code>CMAKE_CURRENT_SOURCE_DIR</code>：当前处理的 CMakeLists.txt 所在的源码目录的路径。</li>
+<li><code>CMAKE_CURRENT_BINARY_DIR</code>：当前处理的 CMakeLists.txt 所在的构建目录的路径。</li>
+<li><code>CMAKE_CURRENT_LIST_DIR</code>：当前处理的 CMakeLists.txt 所在的路径（源码目录或构建目录）。</li>
+<li><code>CMAKE_CURRENT_LIST_LINE</code>：当前正在处理的 CMakeLists.txt 的行号。</li>
+<li><code>CMAKE_MODULE_PATH</code>：一个用于指定额外的 CMake 模块（.cmake 文件）的搜索路径的列表。</li>
+<li><code>CMAKE_INCLUDE_CURRENT_DIR</code>：如果设置为 <code>ON</code>，则在构建过程中自动将当前处理的 CMakeLists.txt 所在的目录添加到包含路径中。</li>
+<li><code>CMAKE_LIBRARY_OUTPUT_DIRECTORY</code>：库文件的输出目录。</li>
+<li><code>CMAKE_RUNTIME_OUTPUT_DIRECTORY</code>：可执行文件的输出目录。</li>
+<li>'PROJECT_SOURCE_DIR' 子项目工程对应目录；</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>变量/宏</th>
+<th>所指目录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PROJECT_SOURCE_DIR</td>
+<td>工程的根目录</td>
+</tr>
+<tr>
+<td>PROJECT_BINARY_DIR</td>
+<td>运行cmake命令的目录，通常为${PROJECT_SOURCE_DIR}/build</td>
+</tr>
+<tr>
+<td>PROJECT_NAME</td>
+<td>返回通过 project 命令定义的项目名称</td>
+</tr>
+<tr>
+<td>CMAKE_CURRENT_SOURCE_DIR</td>
+<td>当前处理的 CMakeLists.txt 所在的路径</td>
+</tr>
+<tr>
+<td>CMAKE_CURRENT_BINARY_DIR</td>
+<td>target <strong>编译</strong>目录</td>
+</tr>
+<tr>
+<td>CMAKE_CURRENT_LIST_DIR</td>
+<td>CMakeLists.txt 的完整路径</td>
+</tr>
+<tr>
+<td>EXECUTABLE_OUTPUT_PATH</td>
+<td>重新定义目标二进制可执行文件的存放位置</td>
+</tr>
+<tr>
+<td>LIBRARY_OUTPUT_PATH</td>
+<td>重新定义目标链接库文件的存放位置</td>
+</tr>
+</tbody>
+</table>
+<p>以上是一些常用的 CMake 变量，其中包含了当前源码路径相关的变量。您可以在 CMakeLists.txt 文件中使用这些变量来设置路径、配置目录结构以及管理构建过程中的输出位置。</p>
+<h1 id="_3">动态库相关</h1>
+<h2 id="_4"><strong>库依赖</strong></h2>
+<p>这里主要着重介绍一下<code>target_link_libraries</code>命令的几个关键字：</p>
+<ol>
+<li><strong>PRIVATE</strong></li>
+<li><strong>INTERFACE</strong></li>
+<li><strong>PUBLIC</strong></li>
+</ol>
+<p>这三个关键字的主要作用是指定的是目标文件依赖项的使用范围（scope），所以可以专门了解一下。</p>
+<p>假设某个项目中存在两个动态链接库：动态链接库<code>liball.so</code>、动态链接库<code>libsub.so</code>。</p>
+<p>对于<strong>PRIVATE</strong>关键字，使用的情形为：<code>liball.so</code><strong>使用</strong>了<code>libsub.so</code>，但是<code>liball.so</code>并<strong>不对外暴露</strong><code>libsub.so</code>的接口：</p>
+<pre><code class="language-text">target_link_libraries(all PRIVATE sub)
+target_include_directories(all PRIVATE sub)
+</code></pre>
+<p>对于<strong>INTERFACE</strong>关键字，使用的情形为：<code>liball.so</code><strong>没有使用</strong><code>libsub.so</code>，但是<code>liball.so</code><strong>对外暴露</strong><code>libsub.so</code>的接口，也就是<code>liball.so</code>的头文件包含了<code>libsub.so</code>的头文件，在其它目标使用<code>liball.so</code>的功能的时候，可能必须要使用<code>libsub.so</code>的功能：</p>
+<pre><code class="language-text">target_link_libraries(all INTERFACE sub)
+target_include_directories(all INTERFACE sub)
+</code></pre>
+<p>对于<strong>PUBLIC</strong>关键字（<strong>PUBLIC=PRIVATE+INTERFACE</strong>），使用的情形为：<code>liball.so</code><strong>使用</strong>了<code>libsub.so</code>，并且<code>liball.so</code><strong>对外暴露</strong>了<code>libsub.so</code>的接口：</p>
+<pre><code class="language-text">target_link_libraries(all PUBLIC sub)
+target_include_directories(all PUBLIC sub)
+</code></pre>
+<h2 id="_5">依赖</h2>
+<p>添加依赖关系，项目依赖关系；</p>
+<pre><code># 添加依赖，依赖内容为CMake生成的目标
+add_dependencies(test myMath)
+add_dependencies(CmakeDemo hello world)
+</code></pre>
+<h2 id="_6">单个头文件和单个库文件</h2>
+<pre><code class="language-cmake"># FindLogger
+# --------
+#
+# Find the Logger libraries
+#
+# Result Variables
+# ^^^^^^^^^^^^^^^^
+#
+# The following variables will be defined:
+#
+# ``Logger_FOUND`` True if Logger found on the local system
+#
+# ``Logger_INCLUDE_DIRS`` Location of Logger header files
+#
+# ``Logger_LIBRARY_DIRS`` Location of Logger libraries
+#
+# ``Logger_LIBRARIES`` List of the Logger libraries found
+#
+
+include(${CMAKE_ROOT}/Modules/FindPackageHandleStandardArgs.cmake)
+include(${CMAKE_ROOT}/Modules/SelectLibraryConfigurations.cmake)
+include(${CMAKE_ROOT}/Modules/CMakeFindDependencyMacro.cmake)
+
+#include(FindPackageHandleStandardArgs)
+
+find_package(PkgConfig)
+set(Baumer_FOUND TRUR)
+set(Logger_VERSION &quot;1.0.0&quot;)
+
+if (DEFINED ENV{USR_LOCAL})
+    set(USR_LOCAL &quot;$ENV{USR_LOCAL}&quot; CACHE STRING &quot;&quot;)
+else()
+    set(USR_LOCAL /usr/local CACHE STRING &quot;&quot;)
+endif()
+
+set(Logger_INCLUDE_DIRS ${USR_LOCAL}/include/logger.h CACHE STRING &quot;&quot;)
+
+set(Logger_LIBRARY_DIRS ${USR_LOCAL}/lib CACHE STRING &quot;&quot;)
+set(Logger_LIBRARIES ${USR_LOCAL}/lib/logger.so CACHE STRING &quot;&quot;)
+
+find_package_handle_standard_args(Logger REQUIRED_VARS Logger_LIBRARIES Logger_LIBRARY_DIRS Logger_INCLUDE_DIRS)
+mark_as_advanced(Logger_INCLUDE_DIR Logger_LIBRARY)
+</code></pre>
+<h2 id="_7">以多个头文件和多个库文件为例</h2>
+<pre><code class="language-cmake"># FindBaumer
+# --------
+#
+# Find the Baumer libraries
+#
+# Result Variables
+# ^^^^^^^^^^^^^^^^
+#
+# The following variables will be defined:
+#
+# ``Baumer_FOUND`` True if Baumer found on the local system
+#
+# ``Baumer_INCLUDE_DIRS`` Location of Baumer header files
+#
+# ``Baumer_LIBRARY_DIRS`` Location of Baumer libraries
+#
+# ``Baumer_LIBRARIES`` List of the Baumer libraries found
+#
+
+include(${CMAKE_ROOT}/Modules/FindPackageHandleStandardArgs.cmake)
+include(${CMAKE_ROOT}/Modules/SelectLibraryConfigurations.cmake)
+include(${CMAKE_ROOT}/Modules/CMakeFindDependencyMacro.cmake)
+
+find_package(PkgConfig)
+set(Baumer_FOUND TRUR)
+set(Baumer_VERSION &quot;1.0.0&quot;)
+
+if (DEFINED ENV{VCPKG_ROOT} AND DEFINED ENV{VCPKG_DEFAULT_TRIPLET})
+    set(Baumer_ROOT_DIR &quot;$ENV{VCPKG_ROOT}/installed/$ENV{VCPKG_DEFAULT_TRIPLET}&quot; CACHE STRING &quot;&quot;)
+endif()
+
+if (DEFINED ENV{CMAKE_PREFIX_PATH})
+  set(Baumer_ROOT_DIR $ENV{CMAKE_PREFIX_PATH})
+endif()
+
+# ---------------- find header files ----------------
+# define macro func to find headers
+macro(Baumer_FIND_INCLUDE varname foldername headername)
+  if(NOT Baumer_${varname}_INCLUDE_DIR)
+    find_path(
+      Baumer_${varname}_INCLUDE_DIR
+      NAMES ${foldername}/${headername}
+      PATHS ${Baumer_ROOT_DIR}/include /usr/local/include)
+    list(APPEND Baumer_INCLUDE_DIRS ${Baumer_${varname}_INCLUDE_DIR})
+  endif()
+endmacro(Baumer_FIND_INCLUDE)
+
+# call macro func to find headers
+Baumer_FIND_INCLUDE(bgapi2_ext            bgapi2_ext      bgapi2_ext.h)
+Baumer_FIND_INCLUDE(bgapi2_ext_addons     bgapi2_ext      bgapi2_ext_addons.h)
+Baumer_FIND_INCLUDE(bgapi2_ext_sc         bgapi2_ext_sc   bgapi2_ext_sc.h)
+Baumer_FIND_INCLUDE(bgapi2_def            bgapi2_genicam  bgapi2_def.h)
+Baumer_FIND_INCLUDE(bgapi2_featurenames   bgapi2_genicam  bgapi2_featurenames.h)
+Baumer_FIND_INCLUDE(bgapi2_genicam        bgapi2_genicam  bgapi2_genicam.hpp)
+
+if (UNIX)
+  Baumer_FIND_INCLUDE(bgapi2_genicam      bgapi2_genicam  bgapi2_genicam.h)
+  Baumer_FIND_INCLUDE(bgapi2_types        bgapi2_genicam  bgapi2_types.h)
+endif()
+
+set(Baumer_INCLUDE_DIRS ${Baumer_INCLUDE_DIRS} CACHE STRING &quot;&quot;)
+message(&quot;Baumer_INCLUDE_DIRS: &quot; ${Baumer_INCLUDE_DIRS})
+
+# ---------------- find library files----------------
+# define macro func to find libs
+macro(Baumer_FIND_LIBRARY libname)
+  if(NOT Baumer_${varname}_LIBRARY)
+     find_library(
+       Baumer_${libname}_LIBRARY
+       NAMES ${libname}
+       PATHS ${Baumer_ROOT_DIR}/lib /usr/local/lib)
+     get_filename_component(Baumer_${libname}_LIBRARY_DIR ${Baumer_${libname}_LIBRARY} DIRECTORY)
+     list(APPEND Baumer_LIBRARY_DIRS ${Baumer_${libname}_LIBRARY_DIR})
+     list(APPEND Baumer_LIBRARIES ${Baumer_${libname}_LIBRARY})
+  endif()
+endmacro(Baumer_FIND_LIBRARY)
+
+# call macro func to find libs
+if(WIN32)
+    Baumer_FIND_LIBRARY(bgapi2_ext.lib)
+    Baumer_FIND_LIBRARY(bgapi2_ext_sc.lib)
+    Baumer_FIND_LIBRARY(bgapi2_genicam.lib)
+elseif(UNIX)
+    Baumer_FIND_LIBRARY(libbgapi2_ext.so)
+    Baumer_FIND_LIBRARY(libbgapi2_ext_sc.so)
+    Baumer_FIND_LIBRARY(libbgapi2_genicam.so)
+    Baumer_FIND_LIBRARY(libbgapi2_gige.so)
+    Baumer_FIND_LIBRARY(libbgapi2_img.so)
+    Baumer_FIND_LIBRARY(libbgapi2_usb.so)
+    Baumer_FIND_LIBRARY(libGCBase_gcc54_v3_2.so)
+    Baumer_FIND_LIBRARY(libGenApi_gcc54_v3_2.so)
+    Baumer_FIND_LIBRARY(libLog_gcc54_v3_2.so)
+    Baumer_FIND_LIBRARY(liblog4cpp_gcc54_v3_2.so)
+    Baumer_FIND_LIBRARY(libMathParser_gcc54_v3_2.so)
+    Baumer_FIND_LIBRARY(libNodeMapData_gcc54_v3_2.so)
+    Baumer_FIND_LIBRARY(libXmlParser_gcc54_v3_2.so)
+endif(WIN32)
+
+message(&quot;Baumer_LIBRARY_DIRS: &quot; ${Baumer_LIBRARY_DIRS})
+message(&quot;Baumer_LIBRARIES: &quot; ${Baumer_LIBRARIES})
+
+set(Baumer_LIBRARY_DIRS ${Baumer_LIBRARY_DIRS} CACHE STRING &quot;&quot;)
+set(Baumer_LIBRARIES ${Baumer_LIBRARIES} CACHE STRING &quot;&quot;)
+
+find_package_handle_standard_args(Baumer REQUIRED_VARS Baumer_LIBRARIES Baumer_LIBRARY_DIRS Baumer_INCLUDE_DIRS)
+mark_as_advanced(Baumer_INCLUDE_DIRS Baumer_LIBRARIES)
+
+</code></pre>
+<h1 id="_8">技巧</h1>
+<h2 id="-ui_h">文件隐藏-隐藏ui_*.h</h2>
+<p>如果你想要在CMake项目中避免在IDE中显示由<code>uic</code>生成的<code>ui_*.h</code>文件，除了使用<code>set_source_files_properties</code>命令之外，还有其他一些方法可以考虑：</p>
+<ol>
+<li>
+<p><strong>忽略特定文件</strong>：
+   在某些IDE中，如Visual Studio，你可以通过在项目文件中添加一个<code>.vcxproj</code>过滤器来忽略特定文件。这通常涉及到编辑项目文件或使用IDE提供的工具来排除文件。</p>
+</li>
+<li>
+<p><strong>使用CMake的<code>target_sources</code>命令</strong>：
+   你可以在<code>target_sources</code>命令中仅添加你希望显示在IDE中的源文件，而排除<code>ui_*.h</code>文件。这样，虽然这些文件仍然会被编译，但它们不会出现在IDE的项目视图中。</p>
+</li>
+</ol>
+<p><code>cmake
+   # 添加可执行文件或库，并排除ui_*.h文件
+   target_sources(MyApp PRIVATE
+     main.cpp
+     other_source.cpp
+     # 不包含 ui_*.h 文件
+   )</code></p>
+<ol>
+<li>
+<p><strong>在IDE中手动排除文件</strong>：
+   在某些IDE中，如Qt Creator或Visual Studio，你可以在项目视图中右键点击文件，然后选择“排除”或“从项目中移除”，这样文件就不会出现在项目视图中。</p>
+</li>
+<li>
+<p><strong>使用<code>set_target_properties</code>命令</strong>：
+   对于特定的目标，你可以使用<code>set_target_properties</code>命令来设置<code>FOLDER</code>属性，将源文件组织到特定的逻辑文件夹中，而将<code>ui_*.h</code>文件放在一个名为“Generated Files”或其他不易察觉的文件夹中。</p>
+</li>
+</ol>
+<p><code>cmake
+   set_target_properties(MyApp PROPERTIES FOLDER "MyApp")
+   set_target_properties(ui_mainwindow.h PROPERTIES FOLDER "Generated Files")</code></p>
+<ol>
+<li><strong>使用CMake的<code>source_group</code>命令</strong>：
+   <code>source_group</code>命令可以用来在IDE中将文件组织到逻辑分组中。你可以创建一个名为“Generated Files”的分组，并将<code>ui_*.h</code>文件添加到这个分组。</li>
+</ol>
+<p><code>cmake
+   file(GLOB UI_HEADERS "${CMAKE_CURRENT_BINARY_DIR}/ui_*.h")
+   source_group("Generated Files" FILES ${UI_HEADERS})</code></p>
+<p>请注意，不同的IDE可能有不同的方法来处理这些情况，上述方法可能需要根据你使用的IDE进行调整。此外，一些IDE可能不支持所有这些方法，或者可能需要特定的插件或扩展来实现类似的功能。</p>
+<h2 id="_9">如何设置启动项</h2>
+<p>在 CMake 中，设置启动项（也称为起始项目或默认目标）通常是通过指定一个可执行文件或自定义目标来完成的。这个启动项将是当你运行构建系统时默认构建的目标。在大多数情况下，你不需要手动设置启动项，因为当你只添加一个可执行文件时，CMake 会默认将其作为启动项。</p>
+<p>如果你有多个可执行文件或自定义目标，并且想要指定其中一个作为启动项，你可以使用 <code>set_property</code> 命令来设置默认目标。以下是一个示例：</p>
+<pre><code class="language-cmake"># 假设你有一个名为 &quot;MyApp&quot; 的可执行文件
+add_executable(MyApp main.cpp)
+
+# 设置 &quot;MyApp&quot; 作为默认启动项
+set_property(TARGET MyApp PROPERTY VS_STARTUP_PROJECT MyProject)
+</code></pre>
+<p>在这个例子中，<code>MyApp</code> 是你希望作为启动项的可执行文件的目标名称。<code>MyProject</code> 是你的 CMake 项目名称，它通常是在 <code>project</code> 命令中指定的。</p>
+<p>如果你在使用 Visual Studio 并且有多个项目（例如，库和可执行文件），你可以在 <code>CMakeLists.txt</code> 文件中使用 <code>project</code> 命令来设置项目名称，然后在 <code>set_property</code> 命令中引用这个名称。</p>
+<p>请注意，这个设置主要适用于 Visual Studio。对于其他构建系统或IDE，如 Makefile 或 Xcode，CMake 可能不会提供直接的方式来设置启动项。在这些情况下，你通常需要在 IDE 的项目配置中手动设置启动项。</p>
+<p>如果你的项目中有多个可执行文件，并且你想要让 CMake 生成的所有可执行文件都成为启动项的候选，你可以使用 <code>add_custom_target</code> 来创建一个包含所有可执行文件的自定义目标，并将其设置为启动项：</p>
+<pre><code class="language-cmake"># 添加多个可执行文件
+add_executable(MyApp1 main1.cpp)
+add_executable(MyApp2 main2.cpp)
+add_executable(MyApp3 main3.cpp)
+
+# 创建一个自定义目标，依赖于所有可执行文件
+add_custom_target(AllApps DEPENDS MyApp1 MyApp2 MyApp3)
+
+# 设置 &quot;AllApps&quot; 作为默认启动项
+set_property(TARGET AllApps PROPERTY VS_STARTUP_PROJECT MyProject)
+</code></pre>
+<p>在这个例子中，<code>AllApps</code> 是一个自定义目标，它依赖于 <code>MyApp1</code>、<code>MyApp2</code> 和 <code>MyApp3</code>。这样，当你在 IDE 中构建 <code>AllApps</code> 时，它将自动构建所有这些应用程序。</p>
+<h2 id="_10">构建模式与宏指定</h2>
+<pre><code># 限制构建类型为 Debug 和 Release
+set(CMAKE_CONFIGURATION_TYPES &quot;Debug;Release&quot;)
+</code></pre>
+<p>在这个示例中，<code>set(CMAKE_CONFIGURATION_TYPES "Debug;Release")</code> 命令设置了可用的构建类型。这意味着当你使用 CMake 生成构建系统时（例如使用 <code>cmake ..</code> 命令），你将只能选择 Debug 或 Release 配置。</p>
+<p>如果你在使用支持多配置生成的 IDE（如 Visual Studio），这个设置将确保 IDE 只提供这两种配置选项。对于生成 Makefile 或其他构建系统的生成器，这个设置将影响可用的构建类型。</p>
+<p>请注意，如果你的项目中使用了任何条件判断构建类型的代码（例如使用 <code>$&lt;CONFIG&gt;</code> 语法），确保这些代码只对 Debug 和 Release 两种情况进行处理。</p>
+<p>此外，如果你的项目需要特定的 Debug 和 Release 配置，你可以使用 <code>add_definitions</code> 或 <code>target_compile_definitions</code> 命令为不同的构建类型添加编译定义：</p>
+<pre><code class="language-cmake"># 为 Debug 构建类型添加编译定义
+add_compile_definitions(_DEBUG)
+
+# 为 Release 构建类型添加编译定义
+if(CMAKE_BUILD_TYPE MATCHES Release)
+  add_compile_definitions(NDEBUG)
+  # 可以在这里添加其他 Release 特定的编译定义或优化
+endif()
+</code></pre>
+<p>在这个示例中，<code>_DEBUG</code> 是在 Debug 模式下定义的一个宏，而 <code>NDEBUG</code> 是在 Release 模式下定义的一个宏，通常用于控制调试代码的编译。通过在 <code>if(CMAKE_BUILD_TYPE MATCHES Release)</code> 条件块中添加编译定义，你可以确保它们只在相应的构建类型中生效。</p>
+<h2 id="_11">指定导出库后缀</h2>
+<p>可以把所有编译器、环境的写成一个if语句。</p>
+<pre><code class="language-cmake"># 为 Debug 和 Release 配置的库文件设置后缀
+set_target_properties(VideoProcess PROPERTIES
+  DEBUG_POSTFIX &quot;_d&quot;
+  RELEASE_POSTFIX &quot;&quot;
+)
+</code></pre>
+<h2 id="_12">调用脚本</h2>
+<h3 id="win">win</h3>
+<p>在 CMake 中执行 <code>.bat</code> 文件，你可以使用 <code>add_custom_command</code> 或 <code>add_custom_target</code> 命令，并在 <code>COMMAND</code> 参数中指定 <code>.bat</code> 文件的路径。CMake 会调用命令行来运行这个批处理文件。</p>
+<p>以下是一个使用 <code>add_custom_command</code> 执行 <code>.bat</code> 文件的示例：</p>
+<pre><code class="language-cmake"># 定义一个自定义命令来执行 .bat 文件
+add_custom_command(
+  TARGET MyTarget POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E chdir %MyTargetDir% &quot;myscript.bat&quot;
+  COMMENT &quot;Executing myscript.bat after building MyTarget&quot;
+)
+
+# 确保你的 .bat 文件位于 MyTargetDir 目录下
+# 如果 .bat 文件位于其他位置，你需要提供完整的路径
+</code></pre>
+<p>在这个例子中，<code>MyTarget</code> 是你的 CMake 目标（例如，可执行文件或库）。<code>POST_BUILD</code> 指定了自定义命令的执行时机，即在目标构建完成后。<code>COMMAND</code> 指定了要执行的命令，这里使用了 <code>cmake -E chdir</code> 命令来改变当前工作目录到目标的目录（<code>%MyTargetDir%</code> 是一个 CMake 预定义变量，它指向目标文件所在的目录），然后执行 <code>myscript.bat</code>。</p>
+<p>如果你的 <code>.bat</code> 文件位于不同的目录，你需要提供完整的路径或者使用 <code>CMAKE_COMMAND</code> 来确保正确的 <code>cmake</code> 命令行工具被调用，如下所示：</p>
+<pre><code class="language-cmake">add_custom_command(
+  TARGET MyTarget POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E chdir &quot;C:/path/to/bat/directory&quot; &quot;myscript.bat&quot;
+  COMMENT &quot;Executing myscript.bat after building MyTarget&quot;
+)
+</code></pre>
+<p>此外，如果你想要在构建过程中创建一个自定义目标来运行 <code>.bat</code> 文件，可以使用 <code>add_custom_target</code> 命令：</p>
+<pre><code class="language-cmake"># 创建一个自定义目标来执行 .bat 文件
+add_custom_target(
+  run_myscript
+  COMMAND ${CMAKE_COMMAND} -E chdir &quot;C:/path/to/bat/directory&quot; &quot;myscript.bat&quot;
+  COMMENT &quot;Executing myscript.bat&quot;
+)
+</code></pre>
+<p>在这个例子中，<code>run_myscript</code> 是自定义目标的名称。你可以通过 <code>make run_myscript</code>（或者在 IDE 中选择相应的目标）来执行这个目标，它将运行 <code>myscript.bat</code> 文件。</p>
+<p>请确保你的 <code>.bat</code> 文件在执行时具有正确的权限，并且所有必要的环境变量都已经设置。如果你的 <code>.bat</code> 文件需要在特定的配置下运行（例如，Debug 或 Release），你可能需要在 <code>add_custom_command</code> 或 <code>add_custom_target</code> 中添加条件判断。</p>
+<h2 id="_13">设置输出路径</h2>
+<ul>
+<li>设置可执行文件输出路径</li>
+</ul>
+<pre><code>SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/../bin)
+</code></pre>
+<ul>
+<li>设置静态库输出路径</li>
+</ul>
+<pre><code>set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../bin)
+</code></pre>
+<ul>
+<li>设置动态库输出路径，放在最后</li>
+</ul>
+<pre><code>SET_TARGET_PROPERTIES(dllname PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../bin)
+</code></pre>
+<ul>
+<li>上面两条语句分别设置了Debug版本和Release版本下库文件的后缀名</li>
+</ul>
+<pre><code>set(CMAKE_DEBUG_POSTFIX &quot;_d&quot;)    set(CMAKE_RELEASE_POSTFIX &quot;_r&quot;) 
+</code></pre>
+<ul>
+<li>设置了Debug版本和Release版本下可执行文件的后缀名</li>
+</ul>
+<pre><code>set_target_properties(${TARGET_NAME} PROPERTIES DEBUG_POSTFIX &quot;_d&quot;) 
+set_target_properties(${TARGET_NAME} PROPERTIES RELEASE_POSTFIX &quot;_r&quot;)
+
+
+</code></pre>
+<p>设置单个目标输出路径</p>
+<pre><code>set_target_properties(${target_name}
+        PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY &quot;${CMAKE_BINARY_DIR}/libs&quot;
+        LIBRARY_OUTPUT_DIRECTORY &quot;${CMAKE_BINARY_DIR}/libs&quot; 
+        RUNTIME_OUTPUT_DIRECTORY &quot;${CMAKE_BINARY_DIR}/libs&quot;
+        FOLDER &quot;lib&quot;)
+</code></pre>
+<h2 id="cmake">.cmake</h2>
+<p>如果希望所有的cmake配置跟随项目源码走，也可以将FindXXX.cmake放在指定的目录，比如当前项目的<code>cmake</code>目录下，随后需要在项目的CMakeList.txt里告知FindXXX.cmake所在目录，即：<code>list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")</code></p>
+<h1 id="_14">命令</h1>
+<h2 id="message">Message</h2>
+<p>在CMake中，<code>message</code>命令用于在配置过程中向用户输出信息。这个命令可以输出不同级别的消息，包括<code>STATUS</code>、<code>WARNING</code>、<code>AUTHOR_WARNING</code>、<code>FATAL_ERROR</code>和<code>SEND_ERROR</code>。这些级别分别对应不同类型的信息和错误，可以帮助用户了解CMake配置过程中的情况。</p>
+<p>以下是<code>message</code>命令的一些基本用法：</p>
+<ol>
+<li>
+<p><strong>输出一般信息</strong> (<code>STATUS</code>):
+   <code>cmake
+   message(STATUS "This is a status message.")</code>
+   这将输出一个普通的信息，通常用于提供配置过程中的进度更新或一般信息。</p>
+</li>
+<li>
+<p><strong>输出警告</strong> (<code>WARNING</code>):
+   <code>cmake
+   message(WARNING "This is a warning message.")</code>
+   这将输出一个警告，通常用于提示用户某些条件可能不是最佳实践，但不会停止配置过程。</p>
+</li>
+<li>
+<p><strong>输出作者警告</strong> (<code>AUTHOR_WARNING</code>):
+   <code>cmake
+   message(AUTHOR_WARNING "This is an author warning message.")</code>
+   作者警告是CMake 3.20引入的新级别，它类似于警告，但用于指示可能需要作者注意的问题，而不是影响最终用户的问题。</p>
+</li>
+<li>
+<p><strong>输出致命错误</strong> (<code>FATAL_ERROR</code>):
+   <code>cmake
+   message(FATAL_ERROR "This is a fatal error message.")</code>
+   这将输出一个致命错误消息，并停止CMake配置过程。这通常用于指示配置失败，因为某些必需的条件没有满足。</p>
+</li>
+<li>
+<p><strong>发送错误</strong> (<code>SEND_ERROR</code>):
+   <code>cmake
+   message(SEND_ERROR "This is a send error message.")</code>
+   <code>SEND_ERROR</code>是CMake 3.21引入的新级别，它的行为类似于<code>FATAL_ERROR</code>，但不会立即停止配置过程。相反，它会将错误发送到CMake的诊断通道，允许配置过程继续，直到遇到另一个致命错误或到达配置的末尾。</p>
+</li>
+</ol>
+<p>使用<code>message</code>命令时，你可以输出任何文本信息，包括变量的值或其他CMake命令的结果。例如：</p>
+<pre><code class="language-cmake">set(MY_VARIABLE &quot;Hello, CMake!&quot;)
+message(STATUS &quot;My variable is: ${MY_VARIABLE}&quot;)
+</code></pre>
+<p>这将输出<code>MY_VARIABLE</code>变量的值。使用<code>message</code>命令可以帮助调试CMakeLists.txt文件，并提供有关配置过程的有用信息。</p>
+<h2 id="file">file</h2>
+<p>在 CMake 中，如果你想递归地搜索项目中所有子文件夹中的 <code>*.h</code> 文件，你可以使用 <code>file(GLOB_RECURSE)</code> 命令。这个命令会递归地查找与给定模式匹配的所有文件。</p>
+<p>以下是一个示例，展示了如何使用 <code>file(GLOB_RECURSE)</code> 命令来查找所有的 <code>*.h</code> 文件：</p>
+<pre><code class="language-cmake"># 递归查找所有的 *.h 文件
+file(GLOB_RECURSE HEADER_FILES &quot;${CMAKE_CURRENT_SOURCE_DIR}&quot; &quot;*.h&quot;)
+
+# 现在 HEADER_FILES 变量包含了所有的 *.h 文件路径
+# 你可以使用这些文件路径作为 add_executable 或 add_library 的参数
+add_executable(MyApp ${HEADER_FILES} other_source_files.cpp)
+# 或者
+# add_library(MyLibrary ${HEADER_FILES} other_source_files.cpp)
+</code></pre>
+<p>在这个示例中，<code>${CMAKE_CURRENT_SOURCE_DIR}</code> 是当前源文件目录的路径，<code>*.h</code> 是一个模式，它匹配任何带有 <code>.h</code> 后缀的文件。<code>file(GLOB_RECURSE)</code> 命令会查找当前目录及其所有子目录下所有匹配该模式的文件，并将它们存储在变量 <code>HEADER_FILES</code> 中。</p>
+<p>然后，你可以使用 <code>add_executable</code> 或 <code>add_library</code> 命令将这些头文件和其他源文件一起添加到你的项目中。请注意，虽然头文件通常不直接编译，但它们会被编译器用于处理源文件中的包含指令。因此，将头文件添加到可执行文件或库目标中是有意义的，尤其是当你想要确保它们被正确地包含在IDE的项目视图中时。</p>
+<p>如果你只想递归地查找特定目录中的 <code>*.h</code> 文件，你可以指定一个不同的路径：</p>
+<pre><code class="language-cmake">file(GLOB_RECURSE HEADER_FILES &quot;${CMAKE_SOURCE_DIR}/include&quot; &quot;*.h&quot;)
+</code></pre>
+<p>在这个例子中，<code>"${CMAKE_SOURCE_DIR}/include"</code> 是你想要开始递归搜索的目录。这将只匹配该目录及其子目录中的 <code>*.h</code> 文件。</p>
+<h2 id="-source_group">目录组织 - source_group()</h2>
+<p>先看看官方给出的命令说明: source_group() 用于定义生成 IDE 工程时的源码分组 (source groups). 有两种创建方式:</p>
+<pre><code>source_group(&lt;name&gt; [FILES &lt;src&gt;...] [REGULAR_EXPRESSION &lt;regex&gt;])
+source_group(TREE &lt;root&gt; [PREFIX &lt;prefix&gt;] [FILES &lt;src&gt;...])
+</code></pre>
+<p>用于定义工程中的源码属于哪个目录组, 主要用于 Visual Studio 中. 有以下选项:</p>
+<ul>
+<li>TREE CMake 会自动检测 \<src> 文件路径来确定需要创建的 source groups, 使得工程中的目录结构和实际文件在磁盘上的目录结构一致. 根据 \<root> 指定的根路径将 \<src> 中的路径截断为相对路径;</li>
+<li>PREFIX 在 \<root> 路径中的 Source group 和文件会被放在 \<prefix> group 中;</li>
+<li>FILES 将显式指定的所有源文件都放在 \<name> group 中, 如果是相对路径, 则是以当前源码路径为参考;</li>
+<li>REGULAR_EXPRESSION 可以匹配到正则表达式的源码文件会被放在 \<name> group 中. 如果某个源码文件可以和多个组进行匹配, 则该文件会被归到最后一个组; 如果某个源码文件没有和任一个组匹配上, 则该文件会被归到正则表达式的最后一个组.</li>
+</ul>
+<p>\<name> 和 \<prefix> 中可以使用两个反斜杆 ‘\’ 符号来指定子 group.</p>
+<p>目录组织问题（筛选器）</p>
+<p>https://blog.csdn.net/technologyleader/article/details/125260395;</p>
+<pre><code>cmake_minimum_required(VERSION 2.8.9)
+project(TEST)
+
+set(SOURCES
+main/main.h
+main/main.cpp
+)
+set(MATHSRC
+math/kalman.h
+math/kalman.cpp
+)
+set(MATSRC
+math/matrix/quat.h
+math/matrix/quat.cpp
+)
+set(UAVSRC
+uav/control.h
+uav/control.cpp
+)
+source_group(main FILES ${SOURCES})
+source_group(math FILES ${MATHSRC})
+source_group(math\\matrix FILES ${MATSRC})
+source_group(uav FILES ${UAVSRC})
+
+add_executable(MAIN ${SOURCES} ${MATHSRC} ${MATSRC} ${UAVSRC})
+</code></pre>
+<p>对工程进行分类 - set_target_properties()</p>
+<p>同类工程在一个的文件夹内，十分整洁. 可以使用 set_target_properties( )函数实现:</p>
+<pre><code class="language-cmake"># 创建一个自定义目标，用于组织所有构建目标
+# 折叠 ZERO_CHECK 
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+set(PREDEFINED_TARGETS_FOLDER &quot;CustomTargets&quot;) # 折叠到默认目录
+# set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER &quot;_CMakePredefinedTargets&quot;) # 折叠到指定目录
+# 折叠all_build和ZERO_CHECK 到默认或指定筛选器中
+##################################################################################
+# 1. 打开允许创建文件夹的开关
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+# 2. 把工程加到文件夹中 !!!!!!
+set_target_properties(hk_camera_test PROPERTIES FOLDER &quot;CMakeTargets&quot;)
+# 3. 给 cmake 自动创建的工程重新命名, 默认名为 &quot;CMakePredefinedTargets&quot; 
+set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER &quot;CMakeTargets&quot;)
+
+</code></pre>
+<h2 id="install">install</h2>
+<p>install用于指定在安装时运行的规则。它可以用来安装很多内容，可以包括目标二进制、动态库、静态库以及文件、目录、脚本等：</p>
+<pre><code>install(TARGETS &lt;target&gt;... [...])
+install({FILES | PROGRAMS} &lt;file&gt;... [...])
+install(DIRECTORY &lt;dir&gt;... [...])
+install(SCRIPT &lt;file&gt; [...])
+install(CODE &lt;code&gt; [...])
+install(EXPORT &lt;export-name&gt; [...])
+</code></pre>
+<p>一般复制或文件夹,//将生成的文件夹下内容全部拷贝到，指定目标目录；</p>
+<p>install(DIRECTORY ${PROJECT_BINARY_DIR}/bin DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+ 拷贝文件到指定目录：</p>
+<p>install(FILES ${PROJECT_BINARY_DIR}/bin/Release/NTBone.dll DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+ 拷贝程序到指定目录：</p>
+<pre><code>#-- Installing: /home/spring/GitHub/Linux_Code_Test/
+#Samples_CMake/messy_usage/install/build.sh
+install(PROGRAMS build.sh DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/install)
+</code></pre>
+<p>指定运行时加载的路径</p>
+<p>SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)</p>
+<p>SET(CMAKE_INSTALL_RPATH "\${ORIGIN}/lib") #指定运行时动态库的加载路径,ORIGIN指运行文件所在目录；</p>
+<p>为生成的target配置安装目录 <code>CMAKE_INSTALL_PREFIX</code></p>
+<pre><code>SET(CMAKE_INSTALL_PREFIX &lt;你要安装的路径&gt;)
+install(TARGETS MyLib
+        EXPORT MyLibTargets 
+        LIBRARY DESTINATION lib  # 动态库安装路径
+        ARCHIVE DESTINATION lib  # 静态库安装路径
+        RUNTIME DESTINATION bin  # 可执行文件安装路径
+        PUBLIC_HEADER DESTINATION include  # 头文件安装路径
+        )
+</code></pre>
+<p>LIBRARY, ARCHIVE, RUNTIME, PUBLIC_HEADER是可选的，可以根据需要进行选择。 DESTINATION后面的路径可以自行制定，根目录默认为CMAKE_INSTALL_PREFIX,可以试用set方法进行指定，如果使用默认值的话，Unix系统的默认值为 /usr/local, Windows的默认值为 c:/Program Files/${PROJECT_NAME}。比如字linux系统下若LIBRARY的安装路径指定为lib,即为/usr/local/lib。所以要安装mymath mymathapp我们可以这样写。</p>
+<h2 id="_15">拷贝</h2>
+<pre><code>#设置变量
+set(OPENCV_DLL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/OpenCV/bin)
+# 设置输出目录
+set(OUTPUT_PATH &quot;${CMAKE_CURRENT_SOURCE_DIR}/../CMakeProjectTestDebug/&quot;)
+set(EXECUTABLE_OUTPUT_PATH &quot;${OUTPUT_PATH}/bin/&quot;)
+set(LIBRARY_OUTPUT_PATH &quot;${OUTPUT_PATH}/lib/&quot;)   
+# 拷贝文件到exe所在的目录
+# 1 拷贝文件夹里的文件
+file(COPY ${OPENCV_DLL_DIR}/ DESTINATION ${EXECUTABLE_OUTPUT_PATH})
+# 2 拷贝bin文件
+file(COPY ${OPENCV_DLL_DIR} DESTINATION ${EXECUTABLE_OUTPUT_PATH})
+</code></pre>
+<p>如：</p>
+<pre><code>file(COPY /opt/fs/lib/libfs.so DESTINATION lib libfs.so)
+</code></pre>
+<pre><code>注意：copy 是 配置 cmake 时就会执行；可用于拷贝代码到一个目录，不适合拷贝生成文件
+将所有符号链接和libfoo.so.1.2.3本身安装到lib中
+</code></pre>
+<p>也可以使用安装代替拷贝;</p>
+<h2 id="findpackage">FindPackage</h2>
+<h1 id="_16">示例</h1>
+<h2 id="1">示例1</h2>
+<blockquote>
+<p>```cmake
+PROJECT( name )</p>
+<p>ADD_EXECUTABLE(main main.cpp context.cpp patten.cpp patten.hpp )</p>
+<p>target_link_libraries(
+           DealWithMould
+          ${VTK_LIBRARIES}
+)</p>
+<p>target_link_libraries(myProject hello) 
+```</p>
+</blockquote>
+<h1 id="_17">参考资料</h1>
+<ul>
+<li><a href="https://cmake.org/cmake/help/book/mastering-cmake/index.html">Mastering CMake — Mastering CMake</a>；</li>
+<li>《CMake构建实战：项目开发卷》作者：许宏旭；</li>
+<li>《Modern CMake for C++》</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

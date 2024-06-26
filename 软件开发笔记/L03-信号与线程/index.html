@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://www.gitee.com/yumoz/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/L03-%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%BA%BF%E7%A8%8B/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>图 - yumoz博客系统</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/rust.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">yumoz博客系统</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">首页</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../01_%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2/" class="nav-link">教程</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../about/" class="nav-link">关于</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link">图</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#27-11-10" class="nav-link">27-11-10</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_2" class="nav-link">线程</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="_1">图</h1>
+<div class="toc">
+<ul>
+<li><a href="#_1">图</a></li>
+<li><a href="#27-11-10">27-11-10</a></li>
+<li><a href="#_2">线程</a></li>
+</ul>
+</div>
+<h1 id="27-11-10">27-11-10</h1>
+<p>组长：</p>
+<p>进程组组长：命令行上启动的多个进程，协同完成某种任务，其中第一个被创建出来的进程，称之为组长进程。</p>
+<p>守护进程本质也是孤儿进程。</p>
+<p>会话首进程有权限打开终端。</p>
+<p>ps axj | head -1 &amp;&amp; ps axj | grep 文件名 </p>
+<p>killall 进程名称  杀掉进程 </p>
+<p>ls /dev/null  -al字符文件、设备；所有设备往这个文件写，等于丢弃这个文件，通常用来进行屏蔽，drop输入输出信息。</p>
+<pre><code class="language-c">//void deamon(int nochidr , int noclose)
+int main()
+{
+    umask(0);// sys/type.h sys/stat.h
+    if(fork()&gt;0){
+        exit(0);
+    }
+    signal(SIGCHLD, SIG_IGN);
+    setsid();//将非组长进程设为新的独立会话
+    //if语句，可以选择不做，防御性编程
+    if(fork()&gt;0){
+        //father
+        exit(0);
+    }
+
+    //可选择选项
+    chdir(&quot;/&quot;);//修改当前路径为根目录，无法打开终端设备
+
+    if(nochld == 0)
+    {
+        //可选择选项
+        chdir(&quot;/&quot;);//修改当前路径为根目录，无法打开终端设备
+    }
+
+    //可选择选项
+    close(0);
+    int fd = open(&quot;dev/null&quot;, O_RDWR);
+    if(fd &lt; 0){return;}
+    dup2(fd, 1);
+    dup2(fd, 2);
+
+    if(noclose == 0)
+    {
+        close(0);
+        int fd = open(&quot;dev/null&quot;, O_RDWR);
+        if(fd &lt; 0){return;}
+        dup2(fd, 1);
+        dup2(fd, 2);
+    }
+
+    //走到此处，孙子进程执行
+    while(1){
+    }
+    return 0;
+}
+int main()
+{
+    my_daemon(1,1);
+    while(1){
+        sleep(1);
+    }
+}
+</code></pre>
+<p>ls /proc/进程编号/fd </p>
+<p>PGRP标记进程组组长编号</p>
+<p>父进程就是组长，</p>
+<h1 id="_2">线程</h1>
+<p>时间点：2021-11-10-00:51:56</p>
+<p>task_struct 共同指向同一个地址空间。</p>
+<p>线程在进程内部运行，线程在进程地址空间内运行。</p>
+<p>in Linux，站在CPU的角度，能否识别task_struct是进程还是线程？？</p>
+<p>什么是进程？（站在内核角度）</p>
+<blockquote>
+<p>承担分配系统资源的基本单位 称之为进程。 进程分配task_struct 和地址空间；</p>
+</blockquote>
+<p><strong>之前对进程的理解</strong>，所有进程都是只有一个task_struct ，该进程内部只有一个执行流。【单执行流进程】</p>
+<p>站在CPU的角度，in Linux，站在CPU的角度，能否识别task_struct是进程还是线程？？【不能，也不需要识别，因为，CPU只关心一个一个的独立执行流。在CPU看来，task_struct &lt;= OS原理上面的进程控制块的】</p>
+<p>在linux下，并不存在真正的多线程，其实是用进程模拟的线程。怎么理解？当线程足够多时，操作系统需要管理线程。</p>
+<p><strong>Linux中，所有执行流，都叫做轻量级进程</strong>。</p>
+<p>既然Linux并没有真正意义的线程，所以，Linux也没有绝对真正意义上的线程相关的同调用。Linux提供创建轻量级进程的接口，创建进程，共享空间。</p>
+<p>那么在用户角度，原生线程库的方案解决，基于轻量级进程的系统调用，用户层模拟实现一套线程接口，pthread。</p>
+<p>32位，4*8=32，页目录10个比特位、页表项10个比特位，物理内存12个比特位关系。物理内存中一个4KB，这个4KB对应的是叶框，每个页框对应$2^{12}$个地址。这些映射关系由MMU完成，MMU集成在CPU中。</p>
+<pre><code>NAME
+       pthread_create - create a new thread
+
+SYNOPSIS
+       #include &lt;pthread.h&gt;
+
+       int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
+                          void *(*start_routine) (void *), void *arg);
+
+       Compile and link with -pthread.
+
+DESCRIPTION
+       The  pthread_create()  function starts a new thread in the calling process.  The new
+       thread starts execution by invoking start_routine(); arg is passed as the sole argu‐
+       ment of start_routine().
+
+       pthread_create() 函数在调用进程中启动一个新线程。 新线程通过调用 start_routine() 开始执行； arg 作为        start_routine() 的唯一参数传递。 
+
+       The new thread terminates in one of the following ways:
+
+       * It  calls  pthread_exit(3),  specifying  an exit status value that is available to
+         another thread in the same process that calls pthread_join(3).
+
+       * It returns from start_routine().  This is equivalent  to  calling  pthread_exit(3)
+         with the value supplied in the return statement.
+
+       * It is canceled (see pthread_cancel(3)).
+
+       * Any  of  the  threads  in the process calls exit(3), or the main thread performs a
+         return from main().  This causes the termination of all threads in the process.
+
+</code></pre>
+<p>从系统理解char *str = "hello yumoz"; str[1] = "o";出错原因。因为物理内存到栈的映射关系出现问题。</p>
+<p>计算密集型：执行流的大部分任务，主要以计算为主：加密解密、排序</p>
+<p>IO密集型：执行流的大部分任务，是以IO为主，刷磁盘，访问数据库，访问网络。</p>
+<p>😊一组寄存器，栈，就是线程和进程的区别。</p>
+<hr /></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

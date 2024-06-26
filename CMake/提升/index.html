@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://www.gitee.com/yumoz/CMake/%E6%8F%90%E5%8D%87/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>变量 - yumoz博客系统</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/rust.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">yumoz博客系统</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">首页</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../01_%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2/" class="nav-link">教程</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../about/" class="nav-link">关于</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link">变量</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#_2" class="nav-link">常规变量</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_3" class="nav-link">环境变量</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_4" class="nav-link">缓存 变量</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_5" class="nav-link">缓存</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_6" class="nav-link">设置调试模式</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#vsrelease" class="nav-link">如何在VS下改Release为调试模式；</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#cmake" class="nav-link">如何在CMAKE中设置</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#vs" class="nav-link">VS的相关配置</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#_7" class="nav-link">设置调试的运行目录或工作目录</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#vs_1" class="nav-link">设置隐藏VS控制台</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#-" class="nav-link">设置配置属性-常规-输出目录</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_8" class="nav-link">参考</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="_1">变量</h1>
+<h2 id="_2">常规变量</h2>
+<pre><code class="language-cmake">message(&quot;======&gt;常规变量&quot;)
+set(PATHS &quot;/tmp&quot; &quot;/bin&quot; &quot;/lib&quot;)
+message(&quot;${PATHS}&quot;)
+
+foreach(PATH ${PATHS})
+    if(PATH)
+        message(${PATH})
+    endif()
+endforeach()
+
+message(&quot;${ABC}&quot;)
+if(NOT DEFINED ABC)
+    set(ABC HiYumoz)
+endif()
+message(&quot;常规变量：ABC-&gt;${ABC}&quot;)
+</code></pre>
+<p>输出：</p>
+<blockquote>
+<p>======&gt;常规变量</p>
+<p>/tmp;/bin;/lib</p>
+<p>/tmp</p>
+<p>/bin</p>
+<p>/lib</p>
+<p>常规变量：ABC-&gt;HiYumoz</p>
+</blockquote>
+<h2 id="_3">环境变量</h2>
+<pre><code class="language-cmake">message(&quot;======&gt;环境变量&quot;)
+set(ENV{PATH} &quot;/tmp;$ENV{QTDIR};$ENV{PATH}&quot;)
+message(&quot;PATH: $ENV{PATH}&quot;)
+unset(ENV{PATH})
+message(&quot;PATH: $ENV{PATH}&quot;)
+</code></pre>
+<p>输出：</p>
+<blockquote>
+<p>======&gt;环境变量</p>
+<p>PATH: /tmp;C:\Qt\5.15.2\msvc2019_64;D:\Application\WPS Office\12.1.0.16729\office6;D:\Program Files (x86)\VMware\VMware Workstation\bin\</p>
+<p>PATH:</p>
+</blockquote>
+<h2 id="_4">缓存 变量</h2>
+<p>CMake第一次构建时会生成CMakeCache.txt，基于CMakeCache.txt存储缓存变量。 此后的构造则会偷懒跳过很多步骤，直接从CMakeCache.txt获取缓存变量。（如果缓存错误，可以直接修改或删除CMakeCache.txt，也可以删除整个build文件夹，让CMake一切重新开始）</p>
+<p>缓存变量的常见类型：</p>
+<ul>
+<li>BOOL: 布尔值ON/OFF</li>
+<li>FILEPATH: 文件路径</li>
+<li>PATH: 目录路径</li>
+<li>STRING: 字符串</li>
+</ul>
+<h1 id="_5">缓存</h1>
+<pre><code class="language-cmake">message(&quot;======&gt;缓存变量&quot;)
+set(BUILD_DEBUG &quot;ON&quot; CACHE STRING &quot;value create by yumoz&quot;)
+message(&quot;BUILD_DEBUG: ${BUILD_DEBUG}&quot;)
+message(&quot;BUILD_RELEASE: ${BUILD_RELEASE}&quot;)
+if(NOT DEFINED MY_CACHE_VAR OR MY_CACHE_VAR MATCHES &quot;old_value&quot;)
+  set(MY_CACHE_VAR &quot;new_value&quot; CACHE STRING &quot;This is my cache variable&quot; FORCE)
+endif()
+message(&quot;The value of MY_CACHE_VAR is ${MY_CACHE_VAR}&quot;)
+option(TEST_DEBUG &quot;option for debug&quot; ON)
+set(TEST_RELEASE &quot;option for release&quot; CACHE BOOL &quot;Help Text:Release Into&quot;)
+
+# 查找本地头文件
+find_path(SPDLOG_PATH main.cpp PATHS ${CMAKE_SOURCE_DIR}/3rd/spdlog NO_DEFAULT_PATH)
+
+# 将查找结果设置为缓存变量
+set(SPDLOG_PATH ${SPDLOG_PATH} CACHE FILEPATH &quot;Path to the spdlog file.&quot;)
+
+# 直接设置缓存变量的值
+set(MY_LIBRARY_PATH &quot;/usr/local/lib&quot; CACHE PATH &quot;Path to the library files.&quot;)
+
+# set(CMAKE_PREFIX_PATH /opt/abc/lib)
+
+list(APPEND CMAKE_PREFIX_PATH /opt/def/lib)
+</code></pre>
+<h1 id="_6">设置调试模式</h1>
+<h2 id="vsrelease">如何在VS下改Release为调试模式；</h2>
+<p><a href="https://www.cnblogs.com/m761303826/p/6477738.html">参考</a>；</p>
+<h2 id="cmake">如何在CMAKE中设置</h2>
+<pre><code>SET(CMAKE_CXX_FLAGS &quot;${CMAKE_CXX_FLAGS} /Zi&quot;)
+SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS &quot;/Od&quot;)
+SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES LINK_FLAGS &quot;/DEBUG&quot;)
+</code></pre>
+<h1 id="vs">VS的相关配置</h1>
+<h2 id="_7">设置调试的运行目录或工作目录</h2>
+<p>设置在Visual Studio中调试的环境变量，此设置仅仅在VS中点击那个绿色三角运行时有效，与你直接双击打开exe文件运行无关，有效避免多版本动态库全部写入系统环境变量的污染问题；</p>
+<pre><code class="language-cmake"># Visual Studio中调试依赖的独立环境变量
+set_property(TARGET ${PROJECT_NAME}  PROPERTY VS_DEBUGGER_ENVIRONMENT &quot;PATH=C:/Qt/Qt5.12.3/5.12.3/msvc2017_64/bin&quot;)
+
+
+# 如果上面写法还是不行，那就试试这样写（保持原来默认的环境不变的情况下添加Qt的运行环境变量）
+set(MY_QT_PATH &quot;C:/Qt/Qt5.12.3/5.12.3/msvc2017_64/bin&quot;)
+set(MY_PATH &quot;PATH=%PATH%&quot; ${MY_QT_PATH})
+set_property(TARGET ${PROJECT_NAME}  PROPERTY VS_DEBUGGER_ENVIRONMENT ${MY_PATH})
+</code></pre>
+<p>设置Visual Studio中调试时的工作根目录（即exe程序内的“./”所指的相对目录），由于工程使用CMake-gui构建的VS工程，所以 “${ProjectDir}” 代表.sln所在的目录；</p>
+<pre><code class="language-cmake"># Visual Studio中的调试工作目录（即exe程序内的“./”所指的目录，仅在VS调试中有效）
+set_property(TARGET ${PROJECT_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY &quot;${ProjectDir}../Bin&quot;)
+</code></pre>
+<p><img alt="image-20240510133815540" src="../ImageSave/image-20240510133815540.png" /></p>
+<p>设置调试的工作目录：</p>
+<pre><code class="language-cmake"># 设置调试的工作目录
+set_target_properties(${TARGET} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY &quot;$(OutDir)&quot;)
+
+
+##### 完整示例
+cmake_minimum_required(VERSION 3.0)
+project(SetWorkingDir CXX)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(DEBUG_WORKING_DIR &quot;path/to/debug/directory&quot;)
+set(RELEASE_WORKING_DIR &quot;path/to/release/directory&quot;)
+
+add_executable(MyExecutable main.cpp)
+
+# 设置调试工作目录
+set_target_properties(MyExecutable PROPERTIES VS_DEBUGGER_WORKING_DIR &quot;${DEBUG_WORKING_DIR}&quot;)
+
+# 根据构建类型选择设置工作目录
+if(CMAKE_BUILD_TYPE STREQUAL &quot;Debug&quot;)
+    set_target_properties(MyExecutable PROPERTIES VS_DEBUGGER_WORKING_DIR &quot;${DEBUG_WORKING_DIR}&quot;)
+elseif(CMAKE_BUILD_TYPE STREQUAL &quot;Release&quot;)
+    set_target_properties(MyExecutable PROPERTIES VS_DEBUGGER_WORKING_DIR &quot;${RELEASE_WORKING_DIR}&quot;)
+endif()
+</code></pre>
+<h2 id="vs_1">设置隐藏VS控制台</h2>
+<h2 id="-">设置配置属性-常规-输出目录</h2>
+<pre><code class="language-cmake">#设置解决方案的常规输出目录
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+# 设置项目的常规输出目录
+set_target_properties(项目名称 PROPERTIES RUNTIME_OUTPUT_DIRECTORY &quot;${CMAKE_BINARY_DIR}/bin&quot;)
+
+# 设置构建目录的根路径
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+</code></pre>
+<h1 id="_8">参考</h1>
+<ul>
+<li><a href="https://blog.csdn.net/Bossking321/article/details/135076038">参考1</a>；</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
